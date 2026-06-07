@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Codeable Project Calculator</title>
+  <meta name="description" content="Estimate Codeable projects from the base estimate, the client-billed amount, or your developer payout." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="card">
+    <header class="card__header">
+      <h1>Codeable Project Calculator</h1>
+      <p class="subtitle">
+        Type into any field. The others update automatically.
+      </p>
+    </header>
+
+    <!-- ───────────────────────── Section 1: Project pricing ───────────────────────── -->
+    <section class="section" aria-labelledby="sec-pricing">
+      <h2 id="sec-pricing" class="section__title">Project pricing</h2>
+
+      <div class="field">
+        <label for="base">Base project estimate</label>
+        <div class="input-wrap has-prefix">
+          <span class="adorn adorn--prefix" aria-hidden="true">$</span>
+          <input id="base" type="text" inputmode="decimal" autocomplete="off"
+                 data-field="base" aria-describedby="base-help" placeholder="0" />
+        </div>
+        <p id="base-help" class="help">
+          The amount you enter on Codeable. Everything else is derived from this.
+        </p>
+      </div>
+
+      <div class="field">
+        <label for="billed">Billed to client</label>
+        <div class="input-wrap has-prefix">
+          <span class="adorn adorn--prefix" aria-hidden="true">$</span>
+          <input id="billed" type="text" inputmode="decimal" autocomplete="off"
+                 data-field="billed" aria-describedby="billed-help" placeholder="0" />
+        </div>
+        <p id="billed-help" class="help">
+          Base&nbsp;+&nbsp;17.5% client service fee &nbsp;(base&nbsp;×&nbsp;1.175).
+        </p>
+      </div>
+
+      <div class="field">
+        <label for="paid">What I get paid</label>
+        <div class="input-wrap has-prefix">
+          <span class="adorn adorn--prefix" aria-hidden="true">$</span>
+          <input id="paid" type="text" inputmode="decimal" autocomplete="off"
+                 data-field="paid" aria-describedby="paid-help" placeholder="0" />
+        </div>
+        <p id="paid-help" class="help">
+          Base&nbsp;−&nbsp;10% developer fee &nbsp;(base&nbsp;×&nbsp;0.9).
+        </p>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── Section 2: Hours and rate ───────────────────────── -->
+    <section class="section" aria-labelledby="sec-hours">
+      <h2 id="sec-hours" class="section__title">Hours and rate</h2>
+      <p class="section__intro">
+        Base estimate = padded hours × hourly rate. Padding inflates your hours
+        estimate — e.g. 30 hrs&nbsp;+&nbsp;30% padding&nbsp;=&nbsp;39 hrs.
+      </p>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="hours">Estimated hours</label>
+          <div class="input-wrap has-suffix">
+            <input id="hours" type="text" inputmode="decimal" autocomplete="off"
+                   data-field="hours" aria-describedby="hours-help" placeholder="0" />
+            <span class="adorn adorn--suffix" aria-hidden="true">hrs</span>
+          </div>
+          <p id="hours-help" class="help">Your raw time estimate.</p>
+        </div>
+
+        <div class="field">
+          <label for="padding">Padding</label>
+          <div class="input-wrap has-suffix has-suffix--sm">
+            <input id="padding" type="text" inputmode="decimal" autocomplete="off"
+                   data-field="padding" aria-describedby="padding-help" placeholder="0" />
+            <span class="adorn adorn--suffix" aria-hidden="true">%</span>
+          </div>
+          <p id="padding-help" class="help">Buffer added on top of your hours.</p>
+        </div>
+
+        <div class="field">
+          <label for="rate">Hourly rate</label>
+          <div class="input-wrap has-prefix has-suffix">
+            <span class="adorn adorn--prefix" aria-hidden="true">$</span>
+            <input id="rate" type="text" inputmode="decimal" autocomplete="off"
+                   data-field="rate" aria-describedby="rate-help" placeholder="0" />
+            <span class="adorn adorn--suffix" aria-hidden="true">/hr</span>
+          </div>
+          <p id="rate-help" class="help">Applied to padded hours.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── Section 3: Fee breakdown ───────────────────────── -->
+    <section class="section" aria-labelledby="sec-fees">
+      <h2 id="sec-fees" class="section__title">Fee breakdown</h2>
+      <dl class="breakdown">
+        <div class="breakdown__row">
+          <dt>Client service fee</dt>
+          <dd data-out="clientFeeRate">17.5%</dd>
+        </div>
+        <div class="breakdown__row">
+          <dt>Client service fee amount</dt>
+          <dd data-out="clientFeeAmount">—</dd>
+        </div>
+        <div class="breakdown__row">
+          <dt>Codeable developer fee</dt>
+          <dd data-out="devFeeRate">10%</dd>
+        </div>
+        <div class="breakdown__row">
+          <dt>Developer fee amount</dt>
+          <dd data-out="devFeeAmount">—</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- ───────────────────────── Actions ───────────────────────── -->
+    <div class="actions">
+      <button type="button" id="copyBtn" class="btn btn--primary">Copy summary</button>
+      <button type="button" id="resetBtn" class="btn btn--ghost">Reset</button>
+    </div>
+
+    <!-- Transient feedback for the copy action -->
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden>Copied to clipboard</div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

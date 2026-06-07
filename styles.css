@@ -1,0 +1,266 @@
+/* ============================================================================
+   Codeable Project Calculator — styles
+   Lightweight, no dependencies. Light + dark mode via prefers-color-scheme.
+   ========================================================================== */
+
+:root {
+  --bg:            #f4f6f8;
+  --card:          #ffffff;
+  --ink:           #1b2733;
+  --ink-soft:      #5a6b7b;
+  --ink-faint:     #8a99a8;
+  --border:        #e2e8ef;
+  --border-strong: #cdd7e0;
+  --accent:        #0f9d77;   /* Codeable-ish teal/green */
+  --accent-ink:    #ffffff;
+  --accent-soft:   #e7f6f1;
+  --field-bg:      #fbfcfd;
+  --shadow:        0 1px 2px rgba(16, 32, 48, .04), 0 12px 32px rgba(16, 32, 48, .08);
+  --radius:        14px;
+  --radius-sm:     9px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:            #0e151c;
+    --card:          #161f29;
+    --ink:           #eaf0f5;
+    --ink-soft:      #a7b6c4;
+    --ink-faint:     #6f8090;
+    --border:        #283543;
+    --border-strong: #364757;
+    --accent:        #1fb98c;
+    --accent-ink:    #07120e;
+    --accent-soft:   #15302a;
+    --field-bg:      #111923;
+    --shadow:        0 1px 2px rgba(0, 0, 0, .3), 0 16px 40px rgba(0, 0, 0, .45);
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 3rem);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+               Arial, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Card ──────────────────────────────────────────────────────────────── */
+.card {
+  width: 100%;
+  max-width: 560px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(1.25rem, 4vw, 2rem);
+}
+
+.card__header { margin-bottom: 1.5rem; }
+
+h1 {
+  font-size: clamp(1.4rem, 4vw, 1.7rem);
+  line-height: 1.2;
+  margin: 0 0 .35rem;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: .95rem;
+}
+
+/* ── Sections ──────────────────────────────────────────────────────────── */
+.section { margin-top: 1.75rem; }
+.section:first-of-type { margin-top: 0; }
+
+.section__title {
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--ink-faint);
+  margin: 0 0 .9rem;
+  padding-bottom: .55rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section__intro {
+  margin: -.3rem 0 1rem;
+  color: var(--ink-soft);
+  font-size: .88rem;
+}
+
+/* ── Fields ────────────────────────────────────────────────────────────── */
+.field { margin-bottom: 1.1rem; }
+.field:last-child { margin-bottom: 0; }
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr 1fr; /* hours · padding · rate */
+  gap: 0.8rem;
+}
+@media (max-width: 540px) {
+  .field-row { grid-template-columns: 1fr; gap: 0; }
+  .field-row .field { margin-bottom: 1.1rem; }
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  font-size: .92rem;
+  margin-bottom: .4rem;
+}
+
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+input {
+  width: 100%;
+  font: inherit;
+  font-size: 1.05rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  background: var(--field-bg);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: .7rem .85rem;
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+input::placeholder { color: var(--ink-faint); }
+
+input:hover { border-color: var(--accent); }
+
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--card);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* Input adornments ($ prefix, /hr & hours suffixes) */
+.adorn {
+  position: absolute;
+  color: var(--ink-faint);
+  font-size: 1rem;
+  pointer-events: none;
+  user-select: none;
+}
+.adorn--prefix { left: .85rem; }
+.adorn--suffix { right: .85rem; }
+
+.has-prefix input { padding-left: 1.7rem; }
+.has-suffix input { padding-right: 3.2rem; }
+.has-suffix--sm input { padding-right: 1.9rem; } /* short suffixes like "%" */
+
+.help {
+  margin: .4rem 0 0;
+  font-size: .8rem;
+  color: var(--ink-soft);
+}
+
+/* ── Fee breakdown ─────────────────────────────────────────────────────── */
+.breakdown {
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.breakdown__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: .7rem .95rem;
+}
+.breakdown__row + .breakdown__row { border-top: 1px solid var(--border); }
+.breakdown__row:nth-child(odd) { background: var(--field-bg); }
+
+.breakdown dt {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: .9rem;
+}
+.breakdown dd {
+  margin: 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Actions ───────────────────────────────────────────────────────────── */
+.actions {
+  display: flex;
+  gap: .65rem;
+  margin-top: 1.75rem;
+}
+
+.btn {
+  flex: 1;
+  font: inherit;
+  font-weight: 600;
+  font-size: .95rem;
+  padding: .7rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform .05s ease, background .15s ease, border-color .15s ease, color .15s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.btn--primary:hover { filter: brightness(1.05); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink-soft);
+  border-color: var(--border-strong);
+}
+.btn--ghost:hover { color: var(--ink); border-color: var(--accent); }
+
+/* ── Toast ─────────────────────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translateX(-50%) translateY(.5rem);
+  background: var(--ink);
+  color: var(--card);
+  font-size: .85rem;
+  font-weight: 600;
+  padding: .6rem 1rem;
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transition: opacity .2s ease, transform .2s ease;
+  pointer-events: none;
+}
+.toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
