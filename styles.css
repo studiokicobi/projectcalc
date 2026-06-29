@@ -12,7 +12,7 @@
   --card:          #ffffff;
   --ink:           #151d22;   /* bunker */
   --ink-soft:      #41525a;
-  --ink-faint:     #6c7d80;
+  --ink-faint:     #5a6b6e;   /* AA 1.4.3: 5.3:1 on field-bg / white */
   --border:        #dbe7e2;   /* light jade */
   --border-strong: #c2d4ce;   /* powder ash */
   --accent:        #165260;   /* turquoise — brand primary */
@@ -32,7 +32,7 @@
     --card:          #151d22;   /* bunker */
     --ink:           #eaf2ef;
     --ink-soft:      #a3b6b0;
-    --ink-faint:     #6f827c;
+    --ink-faint:     #88998f;   /* AA 1.4.3: 5.5:1 on card / field-bg */
     --border:        #26343a;
     --border-strong: #36494f;   /* plantation */
     --accent:        #5cb6ad;    /* lifted teal for dark surfaces */
