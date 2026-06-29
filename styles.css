@@ -230,7 +230,9 @@ input:focus {
 .btn:active { transform: translateY(1px); }
 .btn:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--accent-soft);
+  /* Card-colored gap + accent ring stays visible on both the turquoise
+     primary button and the white ghost button. */
+  box-shadow: 0 0 0 2px var(--card), 0 0 0 4px var(--accent);
 }
 
 .btn--primary {
