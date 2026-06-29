@@ -3,37 +3,44 @@
    Lightweight, no dependencies. Light + dark mode via prefers-color-scheme.
    ========================================================================== */
 
+/* Color tokens use Codeable's brand palette:
+   turquoise #165260 (primary), plantation #294347 (hover), bunker #151d22 (ink),
+   gin #edf5f2 / jade #d6e4e0 (light mint surfaces), peach #ffb299 (secondary). */
 :root {
-  --bg:            #f4f6f8;
+  color-scheme: light;
+  --bg:            #edf4f1;   /* gin — soft mint page */
   --card:          #ffffff;
-  --ink:           #1b2733;
-  --ink-soft:      #5a6b7b;
-  --ink-faint:     #8a99a8;
-  --border:        #e2e8ef;
-  --border-strong: #cdd7e0;
-  --accent:        #0f9d77;   /* Codeable-ish teal/green */
+  --ink:           #151d22;   /* bunker */
+  --ink-soft:      #41525a;
+  --ink-faint:     #6c7d80;
+  --border:        #dbe7e2;   /* light jade */
+  --border-strong: #c2d4ce;   /* powder ash */
+  --accent:        #165260;   /* turquoise — brand primary */
+  --accent-hover:  #0f3d48;   /* darker turquoise */
   --accent-ink:    #ffffff;
-  --accent-soft:   #e7f6f1;
-  --field-bg:      #fbfcfd;
-  --shadow:        0 1px 2px rgba(16, 32, 48, .04), 0 12px 32px rgba(16, 32, 48, .08);
+  --accent-soft:   #dcebe5;   /* soft mint — focus ring */
+  --field-bg:      #f5faf8;
+  --shadow:        0 1px 2px rgba(21, 29, 34, .04), 0 12px 32px rgba(21, 29, 34, .10);
   --radius:        14px;
   --radius-sm:     9px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:            #0e151c;
-    --card:          #161f29;
-    --ink:           #eaf0f5;
-    --ink-soft:      #a7b6c4;
-    --ink-faint:     #6f8090;
-    --border:        #283543;
-    --border-strong: #364757;
-    --accent:        #1fb98c;
-    --accent-ink:    #07120e;
-    --accent-soft:   #15302a;
-    --field-bg:      #111923;
-    --shadow:        0 1px 2px rgba(0, 0, 0, .3), 0 16px 40px rgba(0, 0, 0, .45);
+    color-scheme: dark;
+    --bg:            #0e1418;
+    --card:          #151d22;   /* bunker */
+    --ink:           #eaf2ef;
+    --ink-soft:      #a3b6b0;
+    --ink-faint:     #6f827c;
+    --border:        #26343a;
+    --border-strong: #36494f;   /* plantation */
+    --accent:        #5cb6ad;    /* lifted teal for dark surfaces */
+    --accent-hover:  #6fc2b9;
+    --accent-ink:    #0a1417;     /* dark text on light teal */
+    --accent-soft:   #1c3a3c;     /* dark teal — focus ring */
+    --field-bg:      #111a1f;
+    --shadow:        0 1px 2px rgba(0, 0, 0, .3), 0 16px 40px rgba(0, 0, 0, .5);
   }
 }
 
@@ -230,7 +237,7 @@ input:focus {
   background: var(--accent);
   color: var(--accent-ink);
 }
-.btn--primary:hover { filter: brightness(1.05); }
+.btn--primary:hover { background: var(--accent-hover); }
 
 .btn--ghost {
   background: transparent;
